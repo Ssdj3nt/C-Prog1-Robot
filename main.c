@@ -26,7 +26,7 @@ void gen_ostacoli(char [][lunghezza]);
      * poiché in ogni riga/colonna due posizioni rappresentano gli estremi, cioè le pareti RAND_MAX=16-2;
      * quindi [1;14].*/
 int gen_random(int);
-int main()
+void main()
 {
     char stanza[profondita][lunghezza]={{'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'},
                                         {'X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -44,6 +44,7 @@ int main()
                                         {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                                         {'X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                                         {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
+    puts("\nLa stanza prima di disporre gli ostacoli si presenta cosi:\n");
     visualizza(stanza);
 }
 
@@ -57,12 +58,26 @@ void visualizza(char a[profondita][lunghezza])
         printf("\n");
     }
 }
-void gen_ostacoli(char [profondita][lunghezza])
+
+void gen_ostacoli(char a[profondita][lunghezza])
 {
+    int i,j,n_x,n_y;
+    puts("Inserisci il numero di ostacoli sull'asse delle x;");
+    scanf("%d",&n_x);
+    puts("Inserisci il numero di ostacoli sull'asse delle y:");
+    scanf("%d",&n_y);
+    int i_x,i_y;
+    for(i=1;i<n_x;i++)
+        for(j=1;j<n_y;j++)
+        {
+            i_x= gen_random()
+        }
 }
+
 int gen_random(int x)
 {
-    srand((unsigned int) time(0));
+    srand((unsigned int)time(0));
     x = 1+rand()%14;
+    return x;
 }
 
