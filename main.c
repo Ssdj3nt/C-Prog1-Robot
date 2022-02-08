@@ -53,6 +53,7 @@ int main()
     puts("\nGli ostacoli sono stati disposti.\n");
 
     printf("Il Robot verrà inizializzato con il carattere: %c \n",Robot);
+    posizione_robot(stanza,Robot);
 
 
 
@@ -95,7 +96,16 @@ void posizione_robot(char a[profondita][lunghezza],char Robot)
     scanf("%d",&coordinate.x);
     puts("Inserisci l'ascissa:");
     scanf("%d",&coordinate.y);
+    if(a[coordinate.x][coordinate.y] != 'X' && a[coordinate.x][coordinate.y])
+    {
+        a[coordinate.x][coordinate.y]=Robot;
+        visualizza_matrice(a);
+    }
+    else
+        printf("Errore, qui è presento un ostacolo.");
 
-    a[coordinate.x][coordinate.y]=Robot;
+
+
+
 
 }
