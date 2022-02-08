@@ -24,6 +24,7 @@ void genera_ostacoli(char [][lunghezza]); // Immette ostacoli generati randomica
      * 4: la generazione delle colonne avviene da (a[0][1] ed a[0][m-2]).
      * poiché in ogni riga/colonna due posizioni rappresentano gli estremi, cioè le pareti RAND_MAX=16-2;
      * quindi [1;14].*/
+void posizione_robot(char a[][lunghezza],char);
 
 int main()
 {
@@ -43,10 +44,22 @@ int main()
                                         {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                                         {'X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                                         {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
-    puts("\nLa stanza prima di disporre gli ostacoli si presenta cosi:\n");
+
+    char Robot='R';
+
+    puts("\nLa stanza prima di disporre gli ostacoli si presenta cosi:");
     visualizza_matrice(stanza);
     genera_ostacoli(stanza);
     puts("\nGli ostacoli sono stati disposti.\n");
+
+    printf("Il Robot verrà inizializzato con il carattere: %c \n",Robot);
+
+
+
+
+
+
+
 
 }
 
@@ -64,7 +77,7 @@ void genera_ostacoli(char a[profondita][lunghezza])
 {
     int i,z;
     puts("\nSi consiglia di non eccedere, valori da 1 a 50 generano un percorso accettabile...");
-    puts("\nInserisci la quantità di ostacoli da inserire:\n");
+    puts("\nInserisci la quantità di ostacoli da inserire:");
     scanf("%d",&z);
     srand((unsigned int)time(0));
     for(i=1;i<z;i++)
@@ -74,4 +87,15 @@ void genera_ostacoli(char a[profondita][lunghezza])
         a[obstacle.x][obstacle.y]='X';
     }
     visualizza_matrice(a);
+}
+void posizione_robot(char a[profondita][lunghezza],char Robot)
+{
+    puts("Indica le cordinate della posizione iniziale del robot (1 a 14).");
+    puts("Inserisci l'ordinata:");
+    scanf("%d",&coordinate.x);
+    puts("Inserisci l'ascissa:");
+    scanf("%d",&coordinate.y);
+
+    a[coordinate.x][coordinate.y]=Robot;
+
 }
