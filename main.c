@@ -102,7 +102,7 @@ void posizione_robot(char a[profondita][lunghezza],char Robot)
         visualizza_matrice(a);
     }
     else
-        printf("Errore, qui è presento un ostacolo.");
+        printf("Errore, qui è presente un ostacolo.");
 
 
 
