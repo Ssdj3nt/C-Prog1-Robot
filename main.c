@@ -108,9 +108,4 @@ void posizione_robot(char a[profondita][lunghezza],char Robot)
             printf("\nErrore, qui è presente un ostacolo, riprova.\n");
     }
     while(a[coordinate.x][coordinate.y] == 'X');
-
-
-
-
-
 }
