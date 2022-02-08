@@ -91,18 +91,23 @@ void genera_ostacoli(char a[profondita][lunghezza])
 }
 void posizione_robot(char a[profondita][lunghezza],char Robot)
 {
-    puts("Indica le cordinate della posizione iniziale del robot (1 a 14).");
-    puts("Inserisci l'ordinata:");
-    scanf("%d",&coordinate.x);
-    puts("Inserisci l'ascissa:");
-    scanf("%d",&coordinate.y);
-    if(a[coordinate.x][coordinate.y] != 'X' && a[coordinate.x][coordinate.y])
+    do
     {
-        a[coordinate.x][coordinate.y]=Robot;
-        visualizza_matrice(a);
+        puts("\nIndica le cordinate della posizione iniziale del robot (1 a 14).");
+        puts("Inserisci l'ordinata:");
+        scanf("%d",&coordinate.x);
+        puts("Inserisci l'ascissa:");
+        scanf("%d",&coordinate.y);
+        if(a[coordinate.x][coordinate.y] == ' ')
+        {
+            printf("Robot inserito correttamente.");
+            a[coordinate.x][coordinate.y]=Robot;
+            visualizza_matrice(a);
+        }
+        else
+            printf("\nErrore, qui è presente un ostacolo, riprova.\n");
     }
-    else
-        printf("Errore, qui è presente un ostacolo.");
+    while(a[coordinate.x][coordinate.y] == 'X');
 
 
 
