@@ -28,6 +28,9 @@ void genera_ostacoli(char [][size]); /* Immette ostacoli generati randomicamente
      * 4: la generazione delle colonne avviene da (a[0][2] ed a[0][m-2]).
      * poiché in ogni riga/colonna due posizioni rappresentano gli estremi, cioè le pareti RAND_MAX=16-2, quindi [1;14].*/
 void posizione_robot(char a[][size],char);
+void scelta_movimento(char a[][size],char);
+void movimento1(char a[][size]);
+void movimento2(char a[][size]);
 
 int main()
 {
@@ -66,7 +69,6 @@ int main()
                                   {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
     char Robot='R';
     scelta_stanza(stanza,stanza_prog,Robot);
-
 }
 
 void scelta_stanza(char stanza[size][size],char stanza_prog[size][size],char Robot)
@@ -130,4 +132,28 @@ void posizione_robot(char a[size][size],char Robot)
             printf("\n-Errore, qui è presente un ostacolo, riprova.\n");
     }
     while(a[coordinate.x][coordinate.y] == 'X');
+}
+void scelta_movimento(char a[][size],char Robot)
+{
+    int random;
+    srand((unsigned int) time(0));
+    while(coordinate.x != 0)
+    {
+        visualizza_matrice(a);
+        random = rand()%10;
+        if(random >= 0 && random<3)
+            movimento1(a);
+        else
+            movimento2(a);
+    }
+    printf("\nIl Robot è uscito dalla stanza.\n");
+    visualizza_matrice(a);
+}
+void movimento1(char a[size][size])
+{
+
+}
+void movimento2(char a[size][size])
+{
+
 }
