@@ -19,9 +19,9 @@ void scelta_stanza(char stanza[][size],char stanza_prog[][size],char); /* Nelle 
  * per poi testarne diverse configurazioni. Volendo rispettare queste specifiche si rende disponibile la scelta della stanza richiesta
  * e una stanza in cui è possibile generare randomicamente gli ostacoli per effettuare test senza modificare il codice.*/
 
-void visualizza_matrice(char [][size]); // Visualizza in output la stanza,in particolare, la disposizione degli ostacoli e il movimento del robot.
-void genera_ostacoli(char [][size]); // Immette ostacoli generati randomicamente nella stanza_prog.
-/*La generazione randomica viene eseguita su un intervallo che segue questi criteri:
+void visualizza_matrice(char [][size]); /* Visualizza in output la stanza,in particolare, la disposizione degli ostacoli e il movimento del robot.*/
+void genera_ostacoli(char [][size]); /* Immette ostacoli generati randomicamente nella stanza_prog;
+ * La generazione randomica viene eseguita su un intervallo che segue questi criteri:
      * 1: gli ostacoli non devono sovrapporsi alle pareti.
      * 2: gli ostacoli non devono presentarsi sull'uscita o ostacolarne l'accesso (Edge Case).
      * 3: la generazione per le righe avviene da  (a[2][0] ed a[n-2][0]).
@@ -64,7 +64,6 @@ int main()
                                   {' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
-    char matrice;
     char Robot='R';
     scelta_stanza(stanza,stanza_prog,Robot);
 
