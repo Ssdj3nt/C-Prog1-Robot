@@ -16,10 +16,11 @@ struct ostacolo
 }obstacle;
 
 void scelta_stanza(char stanza[][size],char stanza_prog[][size],char); /* Nelle specifiche del progetto viene richiesto di implementare una specifica disposizione di una stanza
- * per poi testarne diverse configurazioni, volendo rispettare queste specifiche si rende disponibile la scelta della stanza */
+ * per poi testarne diverse configurazioni. Volendo rispettare queste specifiche si rende disponibile la scelta della stanza richiesta
+ * e una stanza in cui è possibile generare randomicamente gli ostacoli per effettuare test senza modificare il codice.*/
 
 void visualizza_matrice(char [][size]); // Visualizza in output la stanza,in particolare, la disposizione degli ostacoli e il movimento del robot.
-void genera_ostacoli(char [][size]); // Immette ostacoli generati randomicamente nella stanza.
+void genera_ostacoli(char [][size]); // Immette ostacoli generati randomicamente nella stanza_prog.
 /*La generazione randomica viene eseguita su un intervallo che segue questi criteri:
      * 1: gli ostacoli non devono sovrapporsi alle pareti.
      * 2: gli ostacoli non devono presentarsi sull'uscita o ostacolarne l'accesso (Edge Case).
