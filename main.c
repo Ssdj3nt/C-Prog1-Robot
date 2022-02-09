@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define  size 16 //essendo una matrice 16x16 basta inizializzare anche una sola dimensione;
+#define  size 16 // Dimensione delle righe e delle colonne.
 
 struct robot
 {
@@ -9,7 +9,7 @@ struct robot
     int y;
 }coordinate;
 
-void visualizza_matrice(char [][size]); /* Visualizza in output la stanza,in particolare, la disposizione degli ostacoli e il movimento del robot.*/
+void visualizza_matrice(char [][size]); // Visualizza in output la stanza.
 void posizione_robot(char a[][size],char);
 void movimento1(char a[][size]);
 void movimento2(char a[][size]);
