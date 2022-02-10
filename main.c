@@ -36,6 +36,7 @@ int main()
     robot.label = 'R';
     int random;
     posizione_robot(stanza);
+
     srand((unsigned int) time(0));
 
     while((robot.x>0 && robot.x<size-2) && (robot.y>0 && robot.y<size-2))
@@ -43,10 +44,10 @@ int main()
         visualizza_matrice(stanza);
         printf("x=%d\t y=%d\n",robot.x,robot.y);
         random = rand()%10;
-        if(random >= 0 && random<3)
+        if(random >= 0 && random<10)
             movimento1(stanza);
         /*else
-            movimento2(stanza_prog);*/
+            movimento2(stanza);*/
     }
     printf("\nIl Robot è uscito dalla stanza.\n");
     visualizza_matrice(stanza);
@@ -84,22 +85,27 @@ void posizione_robot(char stanza[size][size])
 void movimento1(char stanza[size][size])
 {
     int r_num;
-    int y=0,x=0;
     stanza[robot.x][robot.y]=' ';
     r_num = rand()%4;
 
-    switch(r_num)
-    {
-        case 0: robot.y--; if( ((stanza[robot.x][robot.y])=='X') && (x == 1 || y == 0))robot.y++,y=1,x=0;
+    switch (r_num){
 
-        case 1: robot.y++; if( ((stanza[robot.x][robot.y])=='X') && (x == 1 || y == 0))robot.y--,y=1,x=0;
+        case 0: if(stanza[--robot.x][robot.y] == 'X')stanza[++robot.x][robot.y];
+        if(stanza[robot.x][--robot.y] == 'X'){
+                stanza[robot.x][++robot.y];}
 
-        case 2: robot.x--; if( ((stanza[robot.x][robot.y])=='X') && (y == 1 || x == 0))robot.x++,x=1,y=0;
+        case 1: if(stanza[--robot.x][robot.y] == 'X')stanza[++robot.x][robot.y];
+            if(stanza[robot.x][++robot.y] == 'X'){
+                stanza[robot.x][--robot.y];}
 
-        case 3: robot.x++; if( ((stanza[robot.x][robot.y])=='X') && (y == 1 || x == 0))robot.x--,x=1,y=0;
-    }
+        case 2: if(stanza[++robot.x][robot.y] == 'X')stanza[--robot.x][robot.y];
+            if(stanza[robot.x][++robot.y] == 'X'){
+                stanza[robot.x][--robot.y];}
 
-} //30% dei casi.
+        case 3: if(stanza[++robot.x][robot.y] == 'X')stanza[--robot.x][robot.y];
+            if(stanza[robot.x][--robot.y] == 'X'){
+                stanza[robot.x][++robot.y];}}
+}//30% dei casi.
 void movimento2(char a[size][size])
 {
 
