@@ -3,20 +3,21 @@
 #include <time.h>
 #define  size 16 // Dimensione delle righe e delle colonne.
 
-struct robot
+struct data
 {
     int x;
     int y;
-}coordinate;
+    char label;
+}robot;
 
 void visualizza_matrice(char [][size]); // Visualizza in output la stanza.
-void posizione_robot(char a[][size],char);
-void movimento1(char a[][size]);
-void movimento2(char a[][size]);
+void posizione_robot(char [][size]);
+void movimento1(char [][size]);
+void movimento2(char [][size]);
 
 int main()
 {
-    char stanza_prog[size][size]={{'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'},
+    char stanza[size][size]={{'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'},
                                   {'X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X',' ',' ','X',' ',' ',' ','X','X','X','X','X','X','X','X','X'},
@@ -32,58 +33,71 @@ int main()
                                   {' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
-    char Robot='R';
+    robot.label = 'R';
     int random;
-    posizione_robot(stanza_prog,Robot);
-    printf("\n-Il Robot verrà inizializzato con il carattere: %c \n",Robot);
-    visualizza_matrice(stanza_prog);
-
+    posizione_robot(stanza);
     srand((unsigned int) time(0));
-    while(coordinate.x != 0)
+
+    while((robot.x>0 && robot.x<size-2) && (robot.y>0 && robot.y<size-2))
     {
-        visualizza_matrice(stanza_prog);
+        visualizza_matrice(stanza);
+        printf("x=%d\t y=%d\n",robot.x,robot.y);
         random = rand()%10;
         if(random >= 0 && random<3)
-            movimento1(stanza_prog);
-        else
-            movimento2(stanza_prog);
+            movimento1(stanza);
+        /*else
+            movimento2(stanza_prog);*/
     }
     printf("\nIl Robot è uscito dalla stanza.\n");
-    visualizza_matrice(stanza_prog);
+    visualizza_matrice(stanza);
 }
 
-void visualizza_matrice(char a[size][size])
+void visualizza_matrice(char stanza[size][size])
 {
     int i,j;
     for(i=0;i<size;i++)
     {
         for(j=0;j<size;j++)
-            printf("%2c",a[i][j]);
+            printf("%2c",stanza[i][j]);
         printf("\n");
     }
 }
-void posizione_robot(char a[size][size],char Robot)
+void posizione_robot(char stanza[size][size])
 {
     do
     {
         puts("\n-Indica le cordinate della posizione iniziale del robot (2 a 14).");
         printf("-x:");
-        scanf("%d",&coordinate.y);
+        scanf("%d",&robot.y);
         printf("-y:");
-        scanf("%d",&coordinate.x);
-        if(a[coordinate.x][coordinate.y] == ' ')
+        scanf("%d",&robot.x);
+        if(stanza[robot.x][robot.y] == ' ')
         {
-            printf("\n-Robot inserito correttamente.\n");
-            a[coordinate.x][coordinate.y]=Robot;
+            printf("\n-Robot (%c) inserito correttamente.\n",robot.label);
+            stanza[robot.x][robot.y]=robot.label;
         }
         else
             printf("\n-Errore, qui è presente un ostacolo, riprova.\n");
     }
-    while(a[coordinate.x][coordinate.y] == 'X');
+    while(stanza[robot.x][robot.y] == 'X');
 }
-void movimento1(char a[size][size])
+void movimento1(char stanza[size][size])
 {
+    int r_num;
+    int y=0,x=0;
+    stanza[robot.x][robot.y]=' ';
+    r_num = rand()%4;
 
+    switch(r_num)
+    {
+        case 0: robot.y--; if( ((stanza[robot.x][robot.y])=='X') && (x == 1 || y == 0))robot.y++,y=1,x=0;
+
+        case 1: robot.y++; if( ((stanza[robot.x][robot.y])=='X') && (x == 1 || y == 0))robot.y--,y=1,x=0;
+
+        case 2: robot.x--; if( ((stanza[robot.x][robot.y])=='X') && (y == 1 || x == 0))robot.x++,x=1,y=0;
+
+        case 3: robot.x++; if( ((stanza[robot.x][robot.y])=='X') && (y == 1 || x == 0))robot.x--,x=1,y=0;
+    }
 
 } //30% dei casi.
 void movimento2(char a[size][size])
