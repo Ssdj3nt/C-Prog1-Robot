@@ -7,8 +7,11 @@ struct data
 {
     int x;
     int y;
-    char label;
-}robot;
+}r;
+struct movimenti
+{
+    int p;
+}a;
 
 void visualizza_matrice(char [][size]); // Visualizza in output la stanza.
 void posizione_robot(char [][size]);
@@ -33,23 +36,21 @@ int main()
                                   {' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
-    robot.label = 'R';
-    int random;
+    int nc;
     posizione_robot(stanza);
-
     srand((unsigned int) time(0));
 
-    while((robot.x>0 && robot.x<size-2) && (robot.y>0 && robot.y<size-2))
+    while((r.x>=0 && r.x<size-2) && (r.y>=0 && r.y<size-2)) //ciclo ripetuto finchè? il robot resta all'interno alla stanza
     {
         visualizza_matrice(stanza);
-        printf("x=%d\t y=%d\n",robot.x,robot.y);
-        random = rand()%10;
-        if(random >= 0 && random<10)
+        printf("RIGA=%d\t COLONNA=%d\n",r.x,r.y);
+        nc=rand()%10;
+        if(nc>=0 && nc<3)
             movimento1(stanza);
         /*else
             movimento2(stanza);*/
     }
-    printf("\nIl Robot è uscito dalla stanza.\n");
+    printf("\nIl robot e' uscito dalla stanza\n");
     visualizza_matrice(stanza);
 }
 
@@ -69,56 +70,31 @@ void posizione_robot(char stanza[size][size])
     {
         puts("\n-Indica le cordinate della posizione iniziale del robot (2 a 14).");
         printf("-x:");
-        scanf("%d",&robot.y);
+        scanf("%d",&r.y);
         printf("-y:");
-        scanf("%d",&robot.x);
-        if(stanza[robot.x][robot.y] == ' ')
-        {
-            printf("\n-Robot (%c) inserito correttamente.\n",robot.label);
-            stanza[robot.x][robot.y]=robot.label;
-        }
+        scanf("%d",&r.x);
+        if(stanza[r.x][r.y] == ' ' && r.x<size && r.y<size)
+            printf("\n-Robot inserito correttamente.\n");
         else
-            printf("\n-Errore, qui è presente un ostacolo, riprova.\n");
+            printf("\n-Errore, riprova.\n");
     }
-    while(stanza[robot.x][robot.y] == 'X');
+    while(stanza[r.x][r.y] == 'X' || (r.x>size && r.y>size));
 }
-void movimento1(char stanza[size][size])
+void movimento1(char stanza[][size])
 {
-    int r_num;
-    stanza[robot.x][robot.y]=' ';
-    r_num = rand()%4;
+    int n;
+    stanza[r.x][r.y]=' ';
+        n=rand()%4;
+        switch (n)
+        {
+            case 0:r.y--;if(stanza[r.x][r.y]=='X' && r.y<size-2 && (a.p==1 || a.p==2 || a.p==0))r.y++;a.p=0;break; //nord
 
-    switch (r_num)
-    {
+            case 1:r.y++;if(stanza[r.x][r.y]=='X' && r.y>0 && (a.p==1 || a.p==2 || a.p==3))r.y--;a.p=3;break; //sud
 
-        case 0: if(stanza[--robot.x][robot.y] == 'X')stanza[++robot.x][robot.y];
-            switch (r_num)
-            {
-                case 0:if(stanza[robot.x][--robot.y] == 'X')stanza[robot.x][++robot.y];
-                case 1:if(stanza[robot.x][++robot.y] == 'X')stanza[robot.x][--robot.y];
-            }
-        case 1: if(stanza[++robot.x][robot.y] == 'X')stanza[--robot.x][robot.y];
-            switch (r_num)
-            {
-                case 0:if(stanza[robot.x][++robot.y] == 'X')stanza[robot.x][--robot.y];
-                case 1:if(stanza[robot.x][--robot.y] == 'X')stanza[robot.x][++robot.y];
-            }
-        case 2:if(stanza[robot.x][++robot.y] == 'X')stanza[robot.x][--robot.y];
-            switch (r_num)
-            {
-                case 0:if(stanza[--robot.x][robot.y] == 'X')stanza[++robot.x][robot.y];
-                case 1:if(stanza[++robot.x][robot.y] == 'X')stanza[--robot.x][robot.y];
-            }
-        case 3:if(stanza[robot.x][--robot.y] == 'X')stanza[robot.x][++robot.y];
-            switch (r_num)
-            {
-                case 0:if(stanza[--robot.x][robot.y] == 'X')stanza[++robot.x][robot.y];
-                case 1:if(stanza[++robot.x][robot.y] == 'X')stanza[--robot.x][robot.y];
-            }
+            case 2:r.x--;if(stanza[r.x][r.y]=='X' && r.x<size-2 && (a.p== 0 || a.p==3 || a.p==1))r.x++;a.p=1;break;  //est
 
-    }
-}//30% dei casi.
-void movimento2(char a[size][size])
-{
-
-} //70% dei casi.
+            case 3:r.x++;if(stanza[r.x][r.y]=='X' && r.x>0 && (a.p==0 || a.p==3 || a.p==2))r.x--;a.p=2; //ovest
+        }
+    if((r.x>=0 && r.x<size-2) && (r.y>=0 && r.y<size-2))
+        stanza[r.x][r.y]='R';
+}
