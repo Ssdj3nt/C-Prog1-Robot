@@ -11,9 +11,9 @@ struct data
 
 void visualizza_matrice(char [][size]); // Visualizza in output la stanza.
 void posizione_robot(char [][size]);
-void movimento1(char [][size],int *);
+void movimento1(char [][size]);
 void movimento2(char [][size]);
-
+int *p;
 int main()
 {
     char stanza[size][size]={{'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'},
@@ -33,7 +33,6 @@ int main()
                                   {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
     int nc;
-    int *pos=0;
     posizione_robot(stanza);
     srand((unsigned int) time(0));
 
@@ -41,7 +40,7 @@ int main()
     {
         visualizza_matrice(stanza);
         printf("RIGA=%d\t COLONNA=%d\n",r.x,r.y);
-        movimento1(stanza,pos);
+        movimento1(stanza);
         /*nc=rand()%10;
         if(nc>=0 && nc<3)
             movimento1(stanza);
@@ -78,31 +77,30 @@ void posizione_robot(char stanza[size][size])
     }
     while(stanza[r.x][r.y] == 'X' || (r.x>size && r.y>size));
 }
-void movimento1(char stanza[size][size],int *pos)
+void movimento1(char stanza[size][size])
 {
     int n;
     stanza[r.x][r.y]=' ';
         n=rand()%4;
-        if(n==0 && stanza[r.x][--r.y]=='X' && *pos!=2) //Nord 1
+        if(n==0 && stanza[r.x][--r.y]=='X' && *p!=2 && (*p==3 || *p==4)) //Nord 1
         {
             r.y++;
-            *pos=1;
+            *p=1;
         }
-        if(n==1 && stanza[r.x][++r.y]=='X' && *pos!=1) //Sud 2
+        if(n==1 && stanza[r.x][++r.y]=='X' && *p!=1 && (*p==3 || *p==4)) //Sud 2
         {
             r.y--;
-            *pos=2;
+            *p=2;
         }
-        if(n==2 && stanza[--r.x][r.y]=='X' && *pos!=4) //Ovest 3
+        if(n==2 && stanza[--r.x][r.y]=='X' && *p!=4 && (*p==1 || *p==2)) //Ovest 3
         {
             r.x++;
-            *pos=3;
-
+            *p=3;
         }
-        if(n==3 && stanza[++r.x][r.y]=='X' && *pos!=3) //Est 4
+        if(n==3 && stanza[++r.x][r.y]=='X' && *p!=3 && (*p==1 || *p==2)) //Est 4
         {
             r.x--;
-            *pos=4;
+            *p=4;
         }
 }
 
