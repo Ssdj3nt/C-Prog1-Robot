@@ -8,14 +8,10 @@ struct data
     int x;
     int y;
 }r;
-struct movimenti
-{
-    int p;
-}a;
 
 void visualizza_matrice(char [][size]); // Visualizza in output la stanza.
 void posizione_robot(char [][size]);
-void movimento1(char [][size]);
+void movimento1(char [][size],int *);
 void movimento2(char [][size]);
 
 int main()
@@ -37,6 +33,7 @@ int main()
                                   {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                                   {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
     int nc;
+    int *pos=0;
     posizione_robot(stanza);
     srand((unsigned int) time(0));
 
@@ -44,10 +41,11 @@ int main()
     {
         visualizza_matrice(stanza);
         printf("RIGA=%d\t COLONNA=%d\n",r.x,r.y);
-        nc=rand()%10;
+        movimento1(stanza,pos);
+        /*nc=rand()%10;
         if(nc>=0 && nc<3)
             movimento1(stanza);
-        /*else
+        else
             movimento2(stanza);*/
     }
     printf("\nIl robot e' uscito dalla stanza\n");
@@ -80,21 +78,31 @@ void posizione_robot(char stanza[size][size])
     }
     while(stanza[r.x][r.y] == 'X' || (r.x>size && r.y>size));
 }
-void movimento1(char stanza[][size])
+void movimento1(char stanza[size][size],int *pos)
 {
     int n;
     stanza[r.x][r.y]=' ';
         n=rand()%4;
-        switch (n)
+        if(n==0 && stanza[r.x][--r.y]=='X' && *pos!=2) //Nord 1
         {
-            case 0:r.y--;if(stanza[r.x][r.y]=='X' && r.y<size-2 && (a.p==1 || a.p==2 || a.p==0))r.y++;a.p=0;break; //nord
-
-            case 1:r.y++;if(stanza[r.x][r.y]=='X' && r.y>0 && (a.p==1 || a.p==2 || a.p==3))r.y--;a.p=3;break; //sud
-
-            case 2:r.x--;if(stanza[r.x][r.y]=='X' && r.x<size-2 && (a.p== 0 || a.p==3 || a.p==1))r.x++;a.p=1;break;  //est
-
-            case 3:r.x++;if(stanza[r.x][r.y]=='X' && r.x>0 && (a.p==0 || a.p==3 || a.p==2))r.x--;a.p=2; //ovest
+            r.y++;
+            *pos=1;
         }
-    if((r.x>=0 && r.x<size-2) && (r.y>=0 && r.y<size-2))
-        stanza[r.x][r.y]='R';
+        if(n==1 && stanza[r.x][++r.y]=='X' && *pos!=1) //Sud 2
+        {
+            r.y--;
+            *pos=2;
+        }
+        if(n==2 && stanza[--r.x][r.y]=='X' && *pos!=4) //Ovest 3
+        {
+            r.x++;
+            *pos=3;
+
+        }
+        if(n==3 && stanza[++r.x][r.y]=='X' && *pos!=3) //Est 4
+        {
+            r.x--;
+            *pos=4;
+        }
 }
+
