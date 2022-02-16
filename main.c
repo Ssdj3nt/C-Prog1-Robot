@@ -13,8 +13,9 @@ struct robot
 
 void visualizza_matrice(char [][size]); // Visualizza in output la stanza.
 void posizione_robot(char [][size]);
-void movimento1(char [][size],int *);
+void movimento1(char [][size]);
 void movimento2(char [][size]);
+int pos;
 
 int main()
 {
@@ -36,13 +37,12 @@ int main()
                              {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
 
-    int *pos;
     posizione_robot(stanza);
     while((c.x>0 && c.x<size) && (c.y>0 && c.y<size))
     {
         visualizza_matrice(stanza);
         printf("RIGA=%d\t COLONNA=%d\n",c.x,c.y);
-        movimento1(stanza,pos);
+        movimento1(stanza);
     }
     printf("\nIl robot e' uscito dalla stanza\n");
     visualizza_matrice(stanza);
@@ -77,7 +77,7 @@ void posizione_robot(char stanza[size][size])
     }
     while(stanza[c.x][c.y] == 'X');
 }
-void movimento1(char stanza[size][size],int *pos)
+void movimento1(char stanza[size][size])
 {
     int nr,x=FALSE;
     stanza[c.x][c.y] = ' ';
@@ -87,13 +87,13 @@ void movimento1(char stanza[size][size],int *pos)
         nr=rand()%4;
         switch (nr)
         {
-            case 0: if(stanza[--c.x][c.y] == 'X' && (*pos==3 || *pos==4))c.x++;*pos=1;x=TRUE;break;//NORD
+            case 0: if((stanza[--c.x][c.y] == 'X') && (pos!=2 && (pos==3 || pos==4))) c.x++;pos=1;x=TRUE;break;//NORD
 
-            case 1: if(stanza[++c.x][c.y] == 'X' && (*pos==3 || *pos==4))c.x--;*pos=2;x=TRUE;break;//SUD
+            case 1: if((stanza[++c.x][c.y] == 'X') && (pos!=1 && (pos==3 || pos==4))) c.x--;pos=2;x=TRUE;break;//SUD
 
-            case 2: if(stanza[c.x][--c.y] == 'X' && (*pos==1 || *pos==2))c.y++;*pos=3;x=TRUE;break;//EST
+            case 2: if((stanza[c.x][--c.y] == 'X') && (pos!=4 && (pos==1 || pos==2)))  c.y++;pos=3;x=TRUE;break;//EST
 
-            case 3: if(stanza[c.x][++c.y] == 'X' && (*pos==1 || *pos==2))c.y--;*pos=4;x=TRUE;break;//OVEST
+            case 3: if((stanza[c.x][++c.y] == 'X') && (pos!=3 && (pos==1 || pos==2)))  c.y--;pos=4;x=TRUE;break;//OVEST
         }
     }
     stanza[c.x][c.y]='R';
