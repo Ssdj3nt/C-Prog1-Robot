@@ -38,15 +38,12 @@ int main()
 
     int x;
     posizione_robot(stanza);
-    while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))
+    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))
     {
         x=rand()%5;
         visualizza_matrice(stanza);
         printf("RIGA=%d\t COLONNA=%d\n",c.x,c.y);
-        if(x<=3)
-            movimento1(stanza);
-        else
-            movimento2(stanza);
+        movimento1(stanza);
     }
     printf("\nIl robot e' uscito dalla stanza\n");
 }
@@ -88,13 +85,14 @@ void movimento1(char stanza[size][size])
     stanza[c.x][c.y] = ' ';
     nr=rand()%4;
 
-    switch(nr)
-    {
-        case 0:	if(stanza[--c.x][c.y]=='X')c.x++;stanza[c.x][c.y]='R';break;//NORD
-        case 1:	if(stanza[++c.x][c.y]=='X')c.x--;stanza[c.x][c.y]='R';break;//SUD
-        case 2: if(stanza[c.x][--c.y]=='X')c.y++;stanza[c.x][c.y]='R';break;//EST
-        case 3:	if(stanza[c.x][++c.y]=='X')c.y--;stanza[c.x][c.y]='R';break;//OVEST
-    }
+        switch(nr)
+        {
+            case 0:	c.x--;if(stanza[c.x][c.y]=='X' && p!=2)c.x++;p=1;break;
+            case 1:	c.x++;if(stanza[c.x][c.y]=='X' && p!=1)c.x--;p=2;break;
+            case 2: c.y--;if(stanza[c.x][c.y]=='X' && p!=4)c.y++;p=3;break;
+            case 3:	c.y++;if(stanza[c.x][c.y]=='X' && p!=3)c.y--;p=4;break;
+        }
+    stanza[c.x][c.y]='R';
 }//30% dei casi.
 
 void movimento2(char stanza[size][size])
@@ -136,10 +134,10 @@ void movimento2(char stanza[size][size])
 
     switch(ind_max)
     {
-        case 0: if(stanza[--c.x][c.y]=='X') ++c.x;stanza[c.x][c.y]='R';break;//NORD
-        case 1: if(stanza[++c.x][c.y]=='X') --c.x;stanza[c.x][c.y]='R';break;//SUD
-        case 2: if(stanza[c.x][--c.y]=='X') ++c.y;stanza[c.x][c.y]='R';break;//EST
-        case 3: if(stanza[c.x][++c.y]=='X') --c.y;stanza[c.x][c.y]='R';break;//OVEST
+        case 0: c.x--;if(stanza[c.x][c.y]=='X') ++c.x;stanza[c.x][c.y]='R';break;//NORD
+        case 1: c.x++;if(stanza[c.x][c.y]=='X') --c.x;stanza[c.x][c.y]='R';break;//SUD
+        case 2: c.y--;if(stanza[c.x][c.y]=='X') ++c.y;stanza[c.x][c.y]='R';break;//EST
+        case 3: c.y++;if(stanza[c.x][c.y]=='X') --c.y;stanza[c.x][c.y]='R';break;//OVEST
     }
 }//70% dei casi.
 
