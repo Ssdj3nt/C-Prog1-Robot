@@ -15,7 +15,7 @@ void visualizza_matrice(char [][size]); // Visualizza in output la stanza.
 void posizione_robot(char [][size]);
 void movimento1(char [][size]);
 void movimento2(char [][size]);
-int pos;
+int pos=0;
 
 int main()
 {
@@ -87,16 +87,15 @@ void movimento1(char stanza[size][size])
         nr=rand()%4;
         switch (nr)
         {
-            case 0: if((stanza[--c.x][c.y] == 'X') && (pos!=2 && (pos==3 || pos==4))) c.x++;pos=1;x=TRUE;break;//NORD
+            case 0: c.x--;if(stanza[c.x][c.y] == 'X' && pos!=2)c.x++;pos=1;x=TRUE;stanza[c.x][c.y]='R';break;//NORD
 
-            case 1: if((stanza[++c.x][c.y] == 'X') && (pos!=1 && (pos==3 || pos==4))) c.x--;pos=2;x=TRUE;break;//SUD
+            case 1: c.x++;if(stanza[c.x][c.y] == 'X' && pos!=1)c.x--;pos=2;x=TRUE;stanza[c.x][c.y]='R';break;//SUD
 
-            case 2: if((stanza[c.x][--c.y] == 'X') && (pos!=4 && (pos==1 || pos==2)))  c.y++;pos=3;x=TRUE;break;//EST
+            case 2: c.y--;if(stanza[c.x][c.y] == 'X' && pos!=4)c.y++;pos=3;x=TRUE;stanza[c.x][c.y]='R';break;//EST
 
-            case 3: if((stanza[c.x][++c.y] == 'X') && (pos!=3 && (pos==1 || pos==2)))  c.y--;pos=4;x=TRUE;break;//OVEST
+            case 3: c.y++;if(stanza[c.x][c.y] == 'X' && pos!=3)c.y--;pos=4;x=TRUE;stanza[c.x][c.y]='R';break;//OVEST
         }
     }
-    stanza[c.x][c.y]='R';
 }//Movimento casuale,30% dei casi.
 
 void movimento2(char a[size][size])
