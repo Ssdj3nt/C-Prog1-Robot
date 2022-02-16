@@ -36,7 +36,7 @@ int main()
 
     posizione_robot(stanza);
     visualizza_matrice(stanza);
-    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))
+    while((c.x>0 && c.x<size) && (c.y>0 && c.y<size))
     {
         visualizza_matrice(stanza);
         printf("RIGA=%d\t COLONNA=%d\n",c.x,c.y);
@@ -60,7 +60,7 @@ void posizione_robot(char stanza[size][size])
 {
     do
     {
-        puts("\n-Indica le cordinate della posizione iniziale del robot.");
+        puts("\n-Indica le coordinate della posizione iniziale del robot.");
         printf("-x:");
         scanf("%d",&c.x);
         printf("-y:");
@@ -83,16 +83,16 @@ void movimento1(char stanza[size][size])
 
     switch (nr)
     {
-        case 0: if(stanza[--c.x][c.y] == 'X') stanza[++c.x][c.y];break;//NORD
+        case 0: if(stanza[--c.x][c.y] == 'X') ++c.x;break;//NORD
 
-        case 1: if(stanza[++c.x][c.y] == 'X') stanza[--c.x][c.y];break;//SUD
+        case 1: if(stanza[++c.x][c.y] == 'X') --c.x;break;//SUD
 
-        case 2: if(stanza[c.x][--c.y] == 'X') stanza[c.x][++c.y];break;//EST
+        case 2: if(stanza[c.x][--c.y] == 'X') ++c.y;break;//EST
 
-        case 3: if(stanza[c.x][++c.y] == 'X') stanza[c.x][--c.y];break;//OVEST
+        case 3: if(stanza[c.x][++c.y] == 'X') --c.y;break;//OVEST
     }
     stanza[c.x][c.y]='R';
-}
+}//Movimento casuale,30% dei casi.
 void movimento2(char a[size][size])
 {
 
