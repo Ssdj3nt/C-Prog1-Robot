@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #define  size 16 // Dimensione delle righe e delle colonne.
+#define TRUE 1
+#define FALSE 0
 
 struct robot
 {
@@ -35,7 +37,6 @@ int main()
                              {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};
 
     posizione_robot(stanza);
-    visualizza_matrice(stanza);
     while((c.x>0 && c.x<size) && (c.y>0 && c.y<size))
     {
         visualizza_matrice(stanza);
@@ -77,23 +78,27 @@ void posizione_robot(char stanza[size][size])
 }
 void movimento1(char stanza[size][size])
 {
-    int nr;
-    nr=rand()%4;
+    int nr,x=FALSE,pos;
     stanza[c.x][c.y] = ' ';
 
-    switch (nr)
+    while(x==FALSE)
     {
-        case 0: if(stanza[--c.x][c.y] == 'X') ++c.x;break;//NORD
+        nr=rand()%4;
+        switch (nr)
+        {
+            case 0: if(stanza[--c.x][c.y] == 'X' && pos!=2)c.x++;x=TRUE;pos=1;break;//NORD
 
-        case 1: if(stanza[++c.x][c.y] == 'X') --c.x;break;//SUD
+            case 1: if(stanza[++c.x][c.y] == 'X' && pos!=1)c.x--;x=TRUE;pos=2;break;//SUD
 
-        case 2: if(stanza[c.x][--c.y] == 'X') ++c.y;break;//EST
+            case 2: if(stanza[c.x][--c.y] == 'X' && pos!=4)c.y++;x=TRUE;pos=3;break;//EST
 
-        case 3: if(stanza[c.x][++c.y] == 'X') --c.y;break;//OVEST
+            case 3: if(stanza[c.x][++c.y] == 'X' && pos!=3)c.y--;x=TRUE;pos=4;break;//OVEST
+        }
     }
     stanza[c.x][c.y]='R';
 }//Movimento casuale,30% dei casi.
+
 void movimento2(char a[size][size])
 {
 
-}
+}//Movimento intelligente,70% dei casi.
