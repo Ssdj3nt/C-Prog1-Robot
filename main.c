@@ -90,10 +90,10 @@ void movimento1(char stanza[size][size])
 
     switch(nr)
     {
-        case 0:	if(stanza[--c.x][c.y]=='X' && p!=2)c.x++;p=1;stanza[c.x][c.y]='R';break;//NORD
-        case 1:	if(stanza[++c.x][c.y]=='X' && p!=1)c.x--;p=2;stanza[c.x][c.y]='R';break;//SUD
-        case 2: if(stanza[c.x][--c.y]=='X' && p!=4)c.y++;p=3;stanza[c.x][c.y]='R';break;//EST
-        case 3:	if(stanza[c.x][++c.y]=='X' && p!=3)c.y--;p=4;stanza[c.x][c.y]='R';break;//OVEST
+        case 0:	if(stanza[--c.x][c.y]=='X')c.x++;stanza[c.x][c.y]='R';break;//NORD
+        case 1:	if(stanza[++c.x][c.y]=='X')c.x--;stanza[c.x][c.y]='R';break;//SUD
+        case 2: if(stanza[c.x][--c.y]=='X')c.y++;stanza[c.x][c.y]='R';break;//EST
+        case 3:	if(stanza[c.x][++c.y]=='X')c.y--;stanza[c.x][c.y]='R';break;//OVEST
     }
 }//30% dei casi.
 
@@ -136,10 +136,10 @@ void movimento2(char stanza[size][size])
 
     switch(ind_max)
     {
-        case 0: if(stanza[--c.x][c.y]=='X') ++c.x;stanza[c.x][c.y]='R';break;//ovest
-        case 1: if(stanza[++c.x][c.y]=='X') --c.x;stanza[c.x][c.y]='R';break;//est
-        case 2: if(stanza[c.x][--c.y]=='X') ++c.y;stanza[c.x][c.y]='R';break;//nord
-        case 3: if(stanza[c.x][++c.y]=='X') --c.y;stanza[c.x][c.y]='R';break;//sud
+        case 0: if(stanza[--c.x][c.y]=='X') ++c.x;stanza[c.x][c.y]='R';break;//NORD
+        case 1: if(stanza[++c.x][c.y]=='X') --c.x;stanza[c.x][c.y]='R';break;//SUD
+        case 2: if(stanza[c.x][--c.y]=='X') ++c.y;stanza[c.x][c.y]='R';break;//EST
+        case 3: if(stanza[c.x][++c.y]=='X') --c.y;stanza[c.x][c.y]='R';break;//OVEST
     }
 }//70% dei casi.
 
