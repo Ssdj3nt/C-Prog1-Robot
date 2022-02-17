@@ -24,14 +24,14 @@ int p=0;//Variabile globale in cui viene memorizzato il movimento per valore del
 void main()
 {
     srand((unsigned int) time(0));//Inizializzazione del seme per la generazione di numeri pseudocasuali.
-    char stanza[size][size]={{'X',' ',' ',' ','X','X','X','X','X','X','X','X','X','X','X','X'},
+    char stanza[size][size]={{'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'},
                              {'X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X',' ',' ','X',' ',' ',' ','X','X','X','X','X','X','X','X','X'},
                              {'X',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-                             {'X',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-                             {'X',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-                             {'X',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+                             {' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+                             {' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+                             {' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X',' ',' ','X',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X',' ',' ','X',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ','X','X','X',' ','X'},
@@ -43,7 +43,7 @@ void main()
 
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
-    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche' esso non esce dalla stanza.
+    while((c.x>0 && c.x<size) && (c.y>0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche' esso non esce dalla stanza.
     {
         x=rand()%11;//Generazione di numeri da 0 a 10.
         visualizza_matrice(stanza);//Visualizzazione della stanza.
