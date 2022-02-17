@@ -43,7 +43,7 @@ void main()
 
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
-    while((c.x>0 && c.x<size) && (c.y>0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche' esso non esce dalla stanza.
+    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche' esso non esce dalla stanza.
     {
         x=rand()%11;//Generazione di numeri da 0 a 10.
         visualizza_matrice(stanza);//Visualizzazione della stanza.
@@ -98,9 +98,9 @@ void movimento1(char stanza[size][size])
 
         case 1:if(p!=1)c.x--;p=2;if(stanza[c.x][c.y]=='X')c.x++;p=0;break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
 
-        case 2:if(p!=4)c.y++;p=3;if(stanza[c.x][c.y]=='X')c.y--;p=0;break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+        case 2:if(p!=4)c.y++;p=3;if(stanza[c.x][c.y]=='X' && c.y<size)c.y--;p=0;break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
 
-        case 3:if(p!=3)c.y--;p=4;if(stanza[c.x][c.y]=='X')c.y++;p=0;break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
+        case 3:if(p!=3)c.y--;p=4;if(stanza[c.x][c.y]=='X' && c.y>=0)c.y++;p=0;break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
     }stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
 }
 
