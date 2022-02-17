@@ -14,7 +14,7 @@ void posizione_robot(char [][size]);
 void movimento1(char [][size]);
 void movimento2(char [][size]);
 int max_array(int []);
-int p;//Variabile globale in cui viene salvata la direzione, cosi facendo il robot non potrà tornare nella direzione opposta al passo successivo.
+int a=0,i=0,d=0,s=0;//Variabile globale in cui viene salvata la direzione, cosi facendo il robot non potrà tornare nella direzione opposta al passo successivo.
 
 int main()
 {
@@ -87,12 +87,12 @@ void movimento1(char stanza[size][size])
 
         switch(nr)
         {
-            case 0:	c.x--;if(stanza[c.x][c.y]=='X' && p!=2)c.x++;p=1;break;
-            case 1:	c.x++;if(stanza[c.x][c.y]=='X' && p!=1)c.x--;p=2;break;
-            case 2: c.y--;if(stanza[c.x][c.y]=='X' && p!=4)c.y++;p=3;break;
-            case 3:	c.y++;if(stanza[c.x][c.y]=='X' && p!=3)c.y--;p=4;break;
+            case 0:	if(stanza[--c.x][c.y]!='X' && i!=1)a=1;break;
+            case 1:	if(stanza[++c.x][c.y]!='X' && a!=1)i=1;break;
+            case 2: if(stanza[c.x][--c.y]!='X' && s!=1)d=1;break;
+            case 3:	if(stanza[c.x][++c.y]!='X' && d!=1)s=1;break;
         }
-    stanza[c.x][c.y]='R';
+        stanza[c.x][c.y]='R';
 }//30% dei casi.
 
 void movimento2(char stanza[size][size])
