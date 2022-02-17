@@ -116,40 +116,44 @@ void movimento2(char stanza[][size])
             pos[3]=numero di caselle libere verso sud
       ind_max = indice del massimo. Serve per stabilire (tramite switch) in quale locazione dell'array pos vi è il massimo
     */
-    j=r.ny;
-    while(stanza[r.nx][j-1]!='-' && j>0)
+    j=c.y;
+    while(stanza[c.x][j-1]!='X' && j>0)
     {
         --j;
         ++pos[0];//caselle libere ovest
     }
-    j=r.ny;
-    while(stanza[r.nx][j+1]!='-' && j<MAX_SIZE)
+    j=c.y;
+    while(stanza[c.x][j+1]!='X' && j<size)
     {
         ++j;
         ++pos[1];//caselle libere est
     }
-    i=r.nx;
-    while(stanza[i-1][r.ny]!='-' && i>0)
+    i=c.x;
+    while(stanza[i-1][c.y]!='X' && i>0)
     {
         --i;
         ++pos[2];//caselle libere nord
     }
-    i=r.nx;
-    while(stanza[i+1][r.ny]!='-' && i<MAX_SIZE)
+    i=c.x;
+    while(stanza[i+1][c.y]!='X' && i<size)
     {
         ++i;
         ++pos[3];//caselle libere sud
     }
     ind_max=max_array(pos);
-    stanza[r.nx][r.ny]=' ';
+
+    stanza[c.x][c.y]=' ';
     switch(ind_max)
     {
-        case 0:--r.ny; if(stanza[r.nx][r.ny]=='-') ++r.ny;break;//ovest
-        case 1:++r.ny; if(stanza[r.nx][r.ny]=='-') --r.ny;break;//est
-        case 2:--r.nx; if(stanza[r.nx][r.ny]=='-') ++r.nx;break;//nord
-        case 3:++r.nx; if(stanza[r.nx][r.ny]=='-') --r.nx;      //sud
+        case 0: c.x++;p=1;if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
+
+        case 1: c.x--;p=2;if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
+
+        case 2: c.y++;p=3;if(stanza[c.x][c.y]=='X' && c.y<=size){c.y--;p=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+
+        case 3: c.y--;p=4;if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
     }
-    stanza[r.nx][r.ny]='x';
+    stanza[c.x][c.y]='R';
 }
 
 /*max_array:function che restituisce l'indice dell'elemento massimo dell'array che riceve in input
