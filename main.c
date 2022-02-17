@@ -18,7 +18,7 @@ void visualizza_matrice(char [][size]);//Visualizza in output(terminale) la stan
 void posizione_robot(char [][size]);//Function deputata all'inserimento del robot nella stanza in una posizione iniziale scelta dall'utente.
 void movimento1(char [][size]);//Function deputata al movimento casuale nella stanza del robot.Questo movimento si verifica nel 30%
 void movimento2(char [][size]);//Function deputata al movimento in cui il robot “vede” e individua il percorso piu lungo percorribile..Questo movimento si verifica nel 70% dei casi.
-int  max_array(int []);//Funzione deputata alla ricerca del massimo dell array 2D, essa simula la vista del robot in cui ''vede'' nelle 4 direzioni quale sia il percorso percorribile piu lungo.
+int  max_array(int []);//Funzione deputata alla ricerca dell'indice del massimo dell array 2D, essa simula la vista del robot in cui ''vede'' nelle 4 direzioni quale sia il percorso percorribile piu lungo.
 int p=0;//Variabile globale in cui viene memorizzato il movimento per valore del robot cosi che al passo successivo non possa tornare alla posizione precedente.
 
 void main()
@@ -43,7 +43,7 @@ void main()
 
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
-    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche' esso non esce dalla stanza.
+    while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche' esso non esce dalla stanza.
     {
         visualizza_matrice(stanza);//Visualizzazione della stanza.
         printf("RIGA=%d\t COLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
@@ -99,7 +99,7 @@ void movimento1(char stanza[size][size])
 
         case 1:if(p!=1){{c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
 
-        case 2:if(p!=4){{c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<=size){c.y--;p=0;}}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+        case 2:if(p!=4){{c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
 
         case 3:if(p!=3){{c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
     }stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
@@ -156,20 +156,16 @@ void movimento2(char stanza[][size])
     stanza[c.x][c.y]='R';
 }
 
-/*max_array:function che restituisce l'indice dell'elemento massimo dell'array che riceve in input
-input:arr[] = rappresenta l'array pos, il quale contiene il numero di caselle libere per ogni direzione
-*/
+/*input:arr[] = rappresenta l'array pos, il quale contiene il numero di caselle libere per ogni direzione.*/
 int max_array(int arr[])
 {
-    int i,max=-1,num_max,ind[4];
-    /*ind[]    = array che conterrà gli indici di 1 o più massimi
-      num_max  = indica quanti massimi ci sono all'interno dell'array arr[]
-    */
+    int i,max=-1,num_max,ind[4];/*ind[] = array che conterrà gli indici di 1 o più massimi.
+ * num_max  = indica quanti massimi ci sono all'interno dell'array arr[].*/
     for(i=0;i<4;++i)
         if(arr[i]>max)
         {
             max=arr[i];
-            ind[0]=i;//salva l'indice del massimo nella locazione ind[0]
+            ind[0]=i;//Salva l'indice del massimo nella locazione ind[0].
             num_max=1;
         }
         else
@@ -179,13 +175,13 @@ int max_array(int arr[])
             ++num_max;
         }
 
-    if(num_max>1)//se num_max>1 ci sono più massimi, quindi viene restituito un indice a caso tra questi
+    if(num_max>1)//Se num_max>1 ci sono più massimi, quindi viene restituito un indice a caso tra questi.
     {
         max=rand()%num_max;
         return ind[max];
     }
     else
-        return  ind[0];//se num_max non risulta maggiore di 1 viene restituito l'indice dell'unico max dell'array
+        return  ind[0];//Se num_max non risulta maggiore di 1 viene restituito l'indice dell'unico max dell'array.
 }
 
 
