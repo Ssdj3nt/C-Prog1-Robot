@@ -89,24 +89,20 @@ void posizione_robot(char stanza[size][size])
 
 void movimento1(char stanza[size][size])
 {
-    int nr,v=0;
+    int nr;
     stanza[c.x][c.y] = ' ';//Ogni quando viene richiamata la funzione la posizione precedente del robot viene inizializzata come una casella vuota.
+    nr=rand()%4;//Generazione casuale di numeri da 0 a 3, scelto un numero casuale il robot va in quella direzione corrispondente al numero generato.
 
-    while(v==0)//Usa la variabile 'v' per evitare di stampare a terminale la stessa posizione del robot. Fin quando non si muove in una posizione in cui non vi e' ostacolo senza tornare indietro, sposta il robot nella stanza.
-    {
-        nr=rand()%4;//Generazione casuale di numeri da 0 a 3, scelto un numero casuale il robot va in quella direzione corrispondente al numero generato.
-        switch(nr)
+    switch(nr)
         {
-            case 0:if(p!=2 && (p==0 || p==1 || p==3 || p==4)){c.x++;p=1;v=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;v=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
+            case 0:if(p!=2 && (p==0 || p==1 || p==3 || p==4)){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
 
-            case 1:if(p!=1 && (p==0 || p==2 || p==3 || p==4)){c.x--;p=2;v=1;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;v=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
+            case 1:if(p!=1 && (p==0 || p==2 || p==3 || p==4)){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
 
-            case 2:if(p!=4 && (p==0 || p==3 || p==1 || p==2)){c.y++;p=3;v=1;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;v=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+            case 2:if(p!=4 && (p==0 || p==3 || p==1 || p==2)){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
 
-            case 3:if(p!=3 && (p==0 || p==4 || p==1 || p==2)){c.y--;p=4;v=1;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;v=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
-        }
-    }
-    stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
+            case 3:if(p!=3 && (p==0 || p==4 || p==1 || p==2)){c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
+        }stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
 }
 
 void movimento2(char stanza[][size])
