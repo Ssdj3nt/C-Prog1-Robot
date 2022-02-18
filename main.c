@@ -142,13 +142,13 @@ void movimento2(char stanza[][size])
 
     switch(ind_max)
         {
-            case 0:if(p!=2){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
+            case 0: {c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Caso in cui il robot scelga di andare a NORD.
 
-            case 1:if(p!=1){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
+            case 1: {c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Caso in cui il robot scelga di andare a SUD.
 
-            case 2:if(p!=4){c.y++;p=3;}if(stanza[c.x][c.y]=='X'){c.y--;p=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+            case 2: {c.y++;p=3;}if(stanza[c.x][c.y]=='X'){c.y--;p=0;}break; //Caso in cui il robot scelga di andare a EST.
 
-            case 3:if(p!=3){c.y--;p=4;}if(stanza[c.x][c.y]=='X'){c.y++;p=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
+            case 3: {c.y--;p=4;}if(stanza[c.x][c.y]=='X'){c.y++;p=0;}break; //Caso in cui il robot scelga di andare a OVEST.
         }
 
         stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
