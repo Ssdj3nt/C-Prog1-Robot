@@ -43,6 +43,7 @@ int main(void)
 
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
+    visualizza_matrice(stanza);//Visualizza la stanza dopo aver posizionato il robot.
     while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche esso non esce dalla stanza.
     {
         visualizza_matrice(stanza);//Visualizzazione della stanza.
@@ -95,13 +96,13 @@ void movimento1(char stanza[size][size])
 
     switch(nr)
         {
-            case 0:if(p!=2 && (p==0 || p==1 || p==3 || p==4)){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
+            case 0:if(p!=2){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
 
-            case 1:if(p!=1 && (p==0 || p==2 || p==3 || p==4)){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
+            case 1:if(p!=1){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
 
-            case 2:if(p!=4 && (p==0 || p==3 || p==1 || p==2)){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+            case 2:if(p!=4){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
 
-            case 3:if(p!=3 && (p==0 || p==4 || p==1 || p==2)){c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
+            case 3:if(p!=3){c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
         }stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
 }
 
@@ -141,13 +142,13 @@ void movimento2(char stanza[][size])
 
     switch(ind_max)
         {
-            case 0:if(p!=2 && (p==0 || p==1 || p==3 || p==4)){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
+            case 0:if(p!=2){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Caso in cui il robot scelga di andare a NORD.
 
-            case 1:if(p!=1 && (p==0 || p==2 || p==3 || p==4)){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
+            case 1:if(p!=1){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Caso in cui il robot scelga di andare a SUD.
 
-            case 2:if(p!=4 && (p==0 || p==3 || p==1 || p==2)){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+            case 2:if(p!=4){c.y++;p=3;}if(stanza[c.x][c.y]=='X'){c.y--;p=0;}break; //Caso in cui il robot scelga di andare a EST.
 
-            case 3:if(p!=3 && (p==0 || p==4 || p==1 || p==2)){c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
+            case 3:if(p!=3){c.y--;p=4;}if(stanza[c.x][c.y]=='X'){c.y++;p=0;}break; //Caso in cui il robot scelga di andare a OVEST.
         }
 
         stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
