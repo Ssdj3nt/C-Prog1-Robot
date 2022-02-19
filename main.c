@@ -107,29 +107,30 @@ void movimento2(char stanza[][size])
 {
     int i,j=0,e,num_ran,max1=0,max2=0,max3=0,max4=0;
 
-    while(stanza[c.x][c.y]=='X' && c.x<size){
-        if(stanza[c.x++][c.y]!='X')
-        {max1++;}}//NORD
-    for(i=0;i<max1;i++)
-    {c.x--;}//Resetto la posizione.
 
-    while(stanza[c.x][c.y]=='X' && c.x>0){
-        if(stanza[c.x--][c.y]!='X')
-        {max2++;}}//SUD
-    for(i=0;i<max2;i++)
-    {c.x++;}//Resetto la posizione.
 
-    while(stanza[c.x][c.y]=='X' && c.y<size){
-        if(stanza[c.x][c.y++]!='X')
-        {max3++;}}//EST
-    for(i=0;i<max3;i++)
-    {c.y--;}//Resetto la posizione.
+    while(stanza[c.x][c.y]=='X')
+    {
+        if(stanza[c.x++][c.y]!='X' && c.x<size){
+            max1++;//NORD
+            for(i=0;i<max1;i++)
+                c.x--;}//*Resetto la posizione.*/
 
-    while(stanza[c.x][c.y]=='X' && c.y>0){
-        if(stanza[c.x][c.y--]!='X')
-        {max4++;}}//OVEST
-    for(i=0;i<max4;i++)
-    {c.y++;}//Resetto la posizione.
+        else if(stanza[c.x--][c.y]!='X' && c.x>0){
+            max2++;//SUD
+            for(i=0;i<max2;i++)
+                c.x++;}//*Resetto la posizione.*/
+
+        else if(stanza[c.x][c.y++]!='X' && c.y<size){
+            max3++;//EST
+            for(i=0;i<max3;i++)
+                c.y--;}//*Resetto la posizione.*/
+
+        else if(stanza[c.x][c.y--]!='X' && c.y>0){
+            max4++;//OVEST
+            for(i=0;i<max4;i++)
+                c.y++;}//*Resetto la posizione.*/
+        }
 
 
     if(maggiore(max1,max2) == maggiore(max3,max4)){
@@ -141,7 +142,6 @@ void movimento2(char stanza[][size])
         }}
     else
         e = maggiore(maggiore(max1,max2), maggiore(max3,max4));
-
 
     if(e==max1 && p!=2){while(j<=max1){
         stanza[c.x][c.y] = ' ';
