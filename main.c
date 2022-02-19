@@ -108,29 +108,85 @@ void movimento2(char stanza[][size])
     int i,j=0,e,num_ran,max1=0,max2=0,max3=0,max4=0;
 
 
-
-    while(stanza[c.x][c.y]=='X')
+    while(stanza[c.x][c.y]=='X' && c.x<=size)//SUD
     {
-        if(stanza[c.x++][c.y]!='X' && c.x<size){
-            max1++;//NORD
-            for(i=0;i<max1;i++)
-                c.x--;}//*Resetto la posizione.*/
+        c.x++;
+        max1++;
+        if(stanza[c.x][c.y]=='X'){
+            c.x--;
+            max1--;}}
 
-        else if(stanza[c.x--][c.y]!='X' && c.x>0){
-            max2++;//SUD
-            for(i=0;i<max2;i++)
-                c.x++;}//*Resetto la posizione.*/
+    while(stanza[c.x][c.y]=='X' && c.x>=0)
+    {
+        c.x--;
+        max2++;
+        if(stanza[c.x][c.y]=='X'){
+            c.x++;
+            max2--;}}
 
-        else if(stanza[c.x][c.y++]!='X' && c.y<size){
-            max3++;//EST
-            for(i=0;i<max3;i++)
-                c.y--;}//*Resetto la posizione.*/
+    while(stanza[c.x][c.y]=='X' && c.y<=size)
+    {
+        c.y++;
+        max3++;
+        if(stanza[c.x][c.y]=='X'){
+            c.y--;
+            max3--;}}
 
-        else if(stanza[c.x][c.y--]!='X' && c.y>0){
-            max4++;//OVEST
-            for(i=0;i<max4;i++)
-                c.y++;}//*Resetto la posizione.*/
-        }
+    while(stanza[c.x][c.y]=='X' && c.y>=0)
+    {
+        c.y--;
+        max4++;
+        if(stanza[c.x][c.y]=='X'){
+            c.y--;
+            max3--;}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* while(stanza[c.x][c.y]=='X'){
+        if(stanza[c.x--][c.y]!='X' && c.x>0){
+            max2++;}for(i=1;i<=max2;i++)c.x++;}
+
+    while(stanza[c.x][c.y]=='X'){
+        if(stanza[c.x][c.y++]!='X' && c.y<size){
+            max3++;}for(i=1;i<=max3;i++)c.y--;}
+
+    while(stanza[c.x][c.y]=='X'){
+        if(stanza[c.x][c.y--]!='X' && c.y>0){
+            max4++;}for(i=1;i<=max4;i++)c.y++;}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     if(maggiore(max1,max2) == maggiore(max3,max4)){
@@ -143,30 +199,37 @@ void movimento2(char stanza[][size])
     else
         e = maggiore(maggiore(max1,max2), maggiore(max3,max4));
 
+
+
+
     if(e==max1 && p!=2){while(j<=max1){
         stanza[c.x][c.y] = ' ';
         c.x++;
-        stanza[c.x][c.y] = 'R';
-        p=1;
-        j++;}}
+        if(stanza[c.x][c.y]!='X'){
+            stanza[c.x][c.y] = 'R';
+            p=1;
+            j++;}}}
     else if(e==max2 && p!=1){while(j<=max2){
         stanza[c.x][c.y] = ' ';
         c.x--;
-        stanza[c.x][c.y] = 'R';
-        p=2;
-        j++;}}
+        if(stanza[c.x][c.y]!='X'){
+            stanza[c.x][c.y] = 'R';
+            p=2;
+            j++;}}}
     else if(e==max3 && p!=4){while(j<=max3){
         stanza[c.x][c.y] = ' ';
         c.y++;
-        stanza[c.x][c.y] = 'R';
-        p=3;
-        j++;}}
+        if(stanza[c.x][c.y]!='X'){
+            stanza[c.x][c.y] = 'R';
+            p=3;
+            j++;}}}
     else if(e==max4 && p!=3){while(j<=max4){
         stanza[c.x][c.y] = ' ';
         c.y--;
-        stanza[c.x][c.y] = 'R';
-        p=4;
-        j++;}}
+        if(stanza[c.x][c.y]!='X'){
+            stanza[c.x][c.y] = 'R';
+            p=4;
+            j++;}}}
 
 }
 int maggiore(int x,int y)
