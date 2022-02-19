@@ -44,7 +44,7 @@ int main(void)
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
     visualizza_matrice(stanza);//Visualizza la stanza dopo aver posizionato il robot.
-    while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
+    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
     {
         x=rand()%10;//Generazione di numeri pseudocasuali da 0 a 9.
         if(x>=0 && x<3)//Se compreso tra 1 e 3 allora per il 30% il robot si muoverá in modo casuale.
@@ -110,41 +110,55 @@ void movimento2(char stanza[][size])
     int max1=0,max2=0,max3=0,max4=0;//Variabili che conterranno le caselle libere nelle direzioni, esse simulano la vista del robot.
     int i,j=0,a,ra;
 
-    while(stanza[c.x][c.y]!='X' && c.x<size){//Qui vediamo quante caselle SUD sono libere.
-        c.x++;
-        max1++;}
+
+    while(stanza[c.x][c.y]!='X' && c.x<=size){//Qui vediamo quante caselle a SUD sono libere.
+        c.x++;//Vediamo di una casella alla volta quante sono libere.
+        max1++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
     if(stanza[c.x][c.y]=='X'){//Siccome quando il robot capisce che vi é un ostacolo, siamo proprio sulla casella da evitare quindi torniamo indietro di una casella e aggiorniamo il massimo.
         c.x--;
         max1--;}
     for(i=0;i<max1;i++)
         c.x--;//Vediamo quante caselle libere e poi torniamo alla posizione di partenza.
 
-    while(stanza[c.x][c.y]!='X' && c.x>=0){//Qui vediamo quante caselle NORD sono libere.
-        c.x--;
-        max2++;}
+
+
+
+    while(stanza[c.x][c.y]!='X' && c.x>=0){//Qui vediamo quante caselle a NORD sono libere.
+        c.x--;//Vediamo di una casella alla volta quante sono libere.
+        max2++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
     if(stanza[c.x][c.y]=='X'){//Siccome quando il robot capisce che vi é un ostacolo, siamo proprio sulla casella da evitare quindi torniamo indietro di una casella e aggiorniamo il massimo.
         c.x++;
         max2--;}
     for(i=0;i<max2;i++)
         c.x++;//Vediamo quante caselle libere e poi torniamo alla posizione di partenza.
 
-    while(stanza[c.x][c.y]!='X' && c.y<size){//Qui vediamo quante caselle EST sono libere.
-        c.y++;
-        max3++;}
+
+
+
+
+    while(stanza[c.x][c.y]!='X' && c.y<=size){//Qui vediamo quante caselle a EST sono libere.
+        c.y++;//Vediamo di una casella alla volta quante sono libere.
+        max3++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
     if(stanza[c.x][c.y]=='X'){//Siccome quando il robot capisce che vi é un ostacolo, siamo proprio sulla casella da evitare quindi torniamo indietro di una casella e aggiorniamo il massimo.
         c.y--;
         max3--;}
     for(i=0;i<max3;i++)
         c.y--;//Vediamo quante caselle libere e poi torniamo alla posizione di partenza.
 
-    while(stanza[c.x][c.y]!='X' && c.y>=0){//Qui vediamo quante caselle OVEST sono libere.
-        c.y--;
-        max4++;}
+
+
+
+
+    while(stanza[c.x][c.y]!='X' && c.y>=0){//Qui vediamo quante caselle a OVEST sono libere.
+        c.y--;//Vediamo di una casella alla volta quante sono libere.
+        max4++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
     if(stanza[c.x][c.y]=='X'){//Siccome quando il robot capisce che vi é un ostacolo, siamo proprio sulla casella da evitare quindi torniamo indietro di una casella e aggiorniamo il massimo.
         c.y++;
         max4--;}
     for(i=0;i<max4;i++)
         c.y++;//Vediamo quante caselle libere e poi torniamo alla posizione di partenza.
+
+
 
     if(maggiore(max1,max2)==maggiore(max3,max4)){//Se i massimi sono uguali, si sceglie in modo casuale il massimo da usare.
         ra=rand()%3;
@@ -156,38 +170,44 @@ void movimento2(char stanza[][size])
     else
         a = maggiore(maggiore(max1,max2), maggiore(max3,max4));//Viene scelto il massimo con piú caselle libere.
 
-    if(a==max1){while(j!=max1){
-        stanza[c.x][c.y]=' ';
-        c.x++;
-        stanza[c.x][c.y] = 'R';
-        visualizza_matrice(stanza);
+    if(a==max1 && p!=1){while(j!=max1){//Se il massimo maggiore é max1 allora ci muoviamo a SUD
+        stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
+        c.x++;//Il robot si muove nella direzione ove presenti caselle libere.
+        stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
+        visualizza_matrice(stanza);//Visualizziamo la stanza passo dopo passo.
         printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
-        j++;}}
+        p=2;//Salviamo la direzione intrapresa.
+        j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 
-    else if(a==max2){while(j!=max2){
-            stanza[c.x][c.y]=' ';
-            c.x--;
-            stanza[c.x][c.y] = 'R';
-            visualizza_matrice(stanza);
+
+    else if(a==max2 && p!=2){while(j!=max2){//Se il massimo maggiore é max2 allora ci muoviamo a NORD
+            stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
+            c.x--;//Il robot si muove nella direzione ove presenti caselle libere.
+            stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
+            visualizza_matrice(stanza);//Visualizziamo la stanza passo dopo passo.
             printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
-            j++;}}
+            p=1;//Salviamo la direzione intrapresa.
+            j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 
-    else if(a==max3){while(j!=max3){
-            stanza[c.x][c.y]=' ';
-            c.y++;
-            stanza[c.x][c.y] = 'R';
-            visualizza_matrice(stanza);
+
+    else if(a==max3 && p!=4){while(j!=max3){//Se il massimo maggiore é max3 allora ci muoviamo a EST
+            stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
+            c.y++;//Il robot si muove nella direzione ove presenti caselle libere.
+            stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
+            visualizza_matrice(stanza);//Visualizziamo la stanza passo dopo passo.
             printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
-            j++;}}
+            p=3;//Salviamo la direzione intrapresa.
+            j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 
-    else if(a==max4){while(j!=max4){
-            stanza[c.x][c.y]=' ';
-            c.y--;
-            stanza[c.x][c.y] = 'R';
-            visualizza_matrice(stanza);
+
+    else if(a==max4 && p!=3){while(j!=max4){//Se il massimo maggiore é max4 allora ci muoviamo a OVEST
+            stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
+            c.y--;//Il robot si muove nella direzione ove presenti caselle libere.
+            stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
+            visualizza_matrice(stanza);//Visualizziamo la stanza passo dopo passo.
             printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
-            j++;}}
-
+            p=4;//Salviamo la direzione intrapresa.
+            j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 }
 int maggiore(int x,int y)
 {
