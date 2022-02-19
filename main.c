@@ -49,8 +49,7 @@ int main(void)
         visualizza_matrice(stanza);//Visualizzazione della stanza.
         printf("RIGA=%d\t COLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
         x=rand()%10;//Generazione di numeri da 0 a 9.
-
-            movimento2(stanza);//Tutti i numeri maggiori uguali di 3 fanno muovere il robot in modo'intelligente (70%).
+        movimento2(stanza);//Tutti i numeri maggiori uguali di 3 fanno muovere il robot in modo'intelligente (70%).
     }
     printf("\nIl robot e' uscito dalla stanza!\n");//Quando il ciclo finisce e il robot esce dalla stanza viene visualizzato a terminale il messaggio.*/
 }
@@ -150,30 +149,24 @@ void movimento2(char stanza[][size])
         stanza[c.x][c.y] = 'R';
         p=1;
         j++;}}
-
     else if(e==max2 && p!=1){while(j<=max2){
         stanza[c.x][c.y] = ' ';
         c.x--;
         stanza[c.x][c.y] = 'R';
         p=2;
         j++;}}
-
     else if(e==max3 && p!=4){while(j<=max3){
         stanza[c.x][c.y] = ' ';
         c.y++;
         stanza[c.x][c.y] = 'R';
         p=3;
         j++;}}
-
     else if(e==max4 && p!=3){while(j<=max4){
         stanza[c.x][c.y] = ' ';
-        c.x++;
+        c.y--;
         stanza[c.x][c.y] = 'R';
         p=4;
         j++;}}
-
-
-
 
 }
 int maggiore(int x,int y)
