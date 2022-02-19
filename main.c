@@ -105,25 +105,49 @@ void movimento2(char stanza[][size])
     int max1=0,max2=0,max3=0,max4=0;
     int i,j=0,a,ra;
 
-    while(stanza[c.x][c.y]!='X' && c.x<size){//SUD
+    while(stanza[c.x][c.y]!='X' && c.x<=size){//SUD
         c.x++;
         max1++;}
-        if(stanza[c.x][c.y]=='X'){
-            c.x--;
-            max1--;}
-        for(i=0;i<max1;i++){
-        c.x--;}
+    if(stanza[c.x][c.y]=='X'){
+        c.x--;
+        max1--;}
+    for(i=0;i<max1;i++)
+        c.x--;
 
+    while(stanza[c.x][c.y]!='X' && c.x>=0){//NORD
+        c.x--;
+        max2++;}
+    if(stanza[c.x][c.y]=='X'){
+        c.x++;
+        max2--;}
+    for(i=0;i<max2;i++)
+        c.x++;
 
-    if(maggiore(max1,max2)== maggiore(max3,max4))
-    {
+    while(stanza[c.x][c.y]!='X' && c.y<=size){//EST
+        c.y++;
+        max3++;}
+    if(stanza[c.x][c.y]=='X'){
+        c.y--;
+        max3--;}
+    for(i=0;i<max3;i++)
+        c.y--;
+
+    while(stanza[c.x][c.y]!='X' && c.y>=0){//OVEST
+        c.y--;
+        max4++;}
+    if(stanza[c.x][c.y]=='X'){
+        c.y++;
+        max4--;}
+    for(i=0;i<max4;i++)
+        c.y++;
+
+    if(maggiore(max1,max2)==maggiore(max3,max4)){
         ra=rand()%3;
         switch (ra)
         {
             case 0:a=maggiore(max1,max2);break;
             case 1:a=maggiore(max3,max4);break;
-        }
-    }
+        }}
     else
         a = maggiore(maggiore(max1,max2), maggiore(max3,max4));
 
@@ -132,8 +156,32 @@ void movimento2(char stanza[][size])
         c.x++;
         stanza[c.x][c.y] = 'R';
         visualizza_matrice(stanza);
-        printf("RIGA=%d\t COLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
+        printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
         j++;}}
+
+    else if(a==max2){while(j!=max2){
+            stanza[c.x][c.y]=' ';
+            c.x--;
+            stanza[c.x][c.y] = 'R';
+            visualizza_matrice(stanza);
+            printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
+            j++;}}
+
+    else if(a==max3){while(j!=max3){
+            stanza[c.x][c.y]=' ';
+            c.y++;
+            stanza[c.x][c.y] = 'R';
+            visualizza_matrice(stanza);
+            printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
+            j++;}}
+
+    else if(a==max4){while(j!=max4){
+            stanza[c.x][c.y]=' ';
+            c.y--;
+            stanza[c.x][c.y] = 'R';
+            visualizza_matrice(stanza);
+            printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
+            j++;}}
 
 }
 int maggiore(int x,int y)
