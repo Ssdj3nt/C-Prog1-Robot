@@ -35,11 +35,11 @@ int main(void)
                              {'X',' ',' ','X',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X',' ',' ','X',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
                              {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ','X','X','X',' ','X'},
+                             {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' '},
+                             {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' '},
+                             {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ',' '},
                              {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
-                             {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
-                             {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
-                             {'X',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
-                             {'X','X','X',' ',' ',' ','X','X','X','X','X','X','X','X','X','X'}};//Matrice 16x16 che rappresenta la stanza e i suoi ostacoli.
+                             {'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}};//Matrice 16x16 che rappresenta la stanza e i suoi ostacoli.
 
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
@@ -125,8 +125,6 @@ void movimento2(char stanza[][size])
         c.x--;//Vediamo quante caselle libere e poi torniamo alla posizione di partenza.
 
 
-
-
     while(stanza[c.x][c.y]!='X' && c.x>=0){//Qui vediamo quante caselle a NORD sono libere.
         c.x--;//Vediamo di una casella alla volta quante sono libere.
         max2++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
@@ -138,8 +136,6 @@ void movimento2(char stanza[][size])
 
 
 
-
-
     while(stanza[c.x][c.y]!='X' && c.y<size){//Qui vediamo quante caselle a EST sono libere.
         c.y++;//Vediamo di una casella alla volta quante sono libere.
         max3++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
@@ -148,8 +144,6 @@ void movimento2(char stanza[][size])
         max3--;}
     for(i=0;i<max3;i++)
         c.y--;//Vediamo quante caselle libere e poi torniamo alla posizione di partenza.
-
-
 
 
 
