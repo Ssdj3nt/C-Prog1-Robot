@@ -18,7 +18,7 @@ void visualizza_matrice(char [][size]);//Visualizza in output(terminale) la stan
 void posizione_robot(char [][size]);//Function deputata all'inserimento del robot nella stanza in una posizione iniziale scelta dall'utente.
 void movimento1(char [][size]);//Function deputata al movimento casuale nella stanza del robot.Questo movimento si verifica nel 30% dei casi.
 void movimento2(char [][size]);//Function deputata al movimento in cui il robot “vede” e individua il percorso piu lungo percorribile.Questo movimento si verifica nel 70% dei casi.
-int  max_array(int []);//Funzione deputata alla ricerca dell'indice del massimo dell array 2D, essa simula la vista del robot in cui ''vede'' nelle 4 direzioni quale sia il percorso percorribile piu lungo.
+int maggiore(int ,int);
 int p=0;//Variabile globale in cui viene memorizzata la direzione presa del robot cosi che al passo successivo non possa tornare alla posizione precedente.
 
 int main(void)
@@ -49,9 +49,7 @@ int main(void)
         visualizza_matrice(stanza);//Visualizzazione della stanza.
         printf("RIGA=%d\t COLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
         x=rand()%10;//Generazione di numeri da 0 a 9.
-        if(x>=0 && x<3)//Se i numeri generati vanno da 0 a 2, il robot si muove in modo casuale (30%).
-            movimento1(stanza);
-        else
+
             movimento2(stanza);//Tutti i numeri maggiori uguali di 3 fanno muovere il robot in modo'intelligente (70%).
     }
     printf("\nIl robot e' uscito dalla stanza!\n");//Quando il ciclo finisce e il robot esce dalla stanza viene visualizzato a terminale il messaggio.*/
@@ -108,77 +106,72 @@ void movimento1(char stanza[size][size])
 
 void movimento2(char stanza[][size])
 {
+    int i,e,num_ran,max1=0,max2=0,max3=0,max4=0;
 
-    int pos[4]={0},i,j,ind_max;/* pos[] e' un array di 4 elementi che contiene il numero di caselle libere per ogni direzione.
-      ind_max = indice del massimo. Serve per stabilire (tramite switch) in quale locazione dell'array pos vi è il massimo.*/
+    stanza[c.x][c.y] = ' ';
 
-    i=c.x;
-    while(stanza[i-1][c.y]!='X' && i>0){
-        --i;
-        ++pos[0];}//Caselle libere a NORD.
+    while(stanza[c.x][c.y]=='X' && c.x<size){
+        if(stanza[c.x++][c.y]!='X')
+        {max1++;}}//NORD
+    for(i=0;i<max4;i++)
+    {c.x--;}//Resetto la posizione.
 
+    while(stanza[c.x][c.y]=='X' && c.x>0){
+        if(stanza[c.x--][c.y]!='X')
+        {max2++;}}//SUD
+    for(i=0;i<max4;i++)
+    {c.x++;}//Resetto la posizione.
 
-    i=c.x;
-    while(stanza[i+1][c.y]!='X' && i<size){
-        ++i;
-        ++pos[1];}//Caselle libere a SUD.
+    while(stanza[c.x][c.y]=='X' && c.y<size){
+        if(stanza[c.x][c.y++]!='X')
+        {max3++;}}//EST
+    for(i=0;i<max4;i++)
+    {c.y--;}//Resetto la posizione.
 
-
-    j=c.y;
-    while(stanza[c.x][j+1]!='X' && j<size){
-        ++j;
-        ++pos[2];}//Caselle libere ad EST.
-
-
-    j=c.y;
-    while(stanza[c.x][j-1]!='X' && j>0){
-        --j;
-        ++pos[3];}//Caselle libere ad OVEST.
-
-
-    ind_max=max_array(pos);
-    stanza[c.x][c.y]=' ';
+    while(stanza[c.x][c.y]=='X' && c.y>0){
+        if(stanza[c.x][c.y--]!='X')
+        {max4++;}}//OVEST
+    for(i=0;i<max4;i++)
+    {c.y++;}//Resetto la posizione.
 
 
-    switch(ind_max)
-        {
-            case 0: {c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Caso in cui il robot scelga di andare a NORD.
-
-            case 1: {c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Caso in cui il robot scelga di andare a SUD.
-
-            case 2: {c.y++;p=3;}if(stanza[c.x][c.y]=='X'){c.y--;p=0;}break; //Caso in cui il robot scelga di andare a EST.
-
-            case 3: {c.y--;p=4;}if(stanza[c.x][c.y]=='X'){c.y++;p=0;}break; //Caso in cui il robot scelga di andare a OVEST.
-        }
-
-        stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
-}
-
-int max_array(int arr[])//arr[] = rappresenta l'array pos, il quale contiene il numero di caselle libere per ogni direzione
-{
-    int i,max=-1,num_max,ind[4];/*ind[] = array che conterrà gli indici di 1 o più massimi.
- * num_max  = indica quanti massimi ci sono all'interno dell'array arr[].*/
-    for(i=0;i<4;++i)
-        if(arr[i]>max)
-        {
-            max=arr[i];
-            ind[0]=i;//Salva l'indice del massimo nella locazione ind[0].
-            num_max=1;
-        }
-        else
-        if(arr[i]==max)
-        {
-            ind[num_max]=i;
-            ++num_max;
-        }
-
-    if(num_max>1)//Se num_max>1 ci sono più massimi, quindi viene restituito un indice a caso tra questi.
+    if(maggiore(max1,max2) == maggiore(max3,max4))
     {
-        max=rand()%num_max;
-        return ind[max];
+        num_ran=rand()%3;
+        switch (num_ran)
+        {
+            case 0: e = maggiore(max1,max2);break;
+            case 1: e = maggiore(max3,max4);break;
+        }
     }
     else
-        return  ind[0];//Se num_max non risulta maggiore di 1 viene restituito l'indice dell'unico max dell'array.
-}
+        e = maggiore(maggiore(max1,max2), maggiore(max3,max4));
 
+
+
+    if(e==max1)
+    {
+
+    }
+    if(e==max2)
+    {
+
+    }
+    if(e==max3)
+    {
+
+    }
+    if(e==max4)
+    {
+
+    }
+
+}
+int maggiore(int x,int y)
+{
+    if(x>y)
+        return x;
+    else
+        return y;
+}
 
