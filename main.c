@@ -44,7 +44,7 @@ int main(void)
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
     visualizza_matrice(stanza);//Visualizza la stanza dopo aver posizionato il robot.
-    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
+    while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
     {
         x=rand()%10;//Generazione di numeri pseudocasuali da 0 a 9.
         if(x>=0 && x<3)//Se compreso tra 1 e 3 allora per il 30% il robot si muoverá in modo casuale.
@@ -94,11 +94,11 @@ void movimento1(char stanza[size][size])
 
     switch(nr)
         {
-            case 0:if(p!=2){c.x++;p=1;}if(stanza[c.x][c.y]=='X' && c.x<=size){c.x--;p=0;}break; //Se il robot non é stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
+            case 0:if(p!=2){c.x++;p=1;}if(stanza[c.x][c.y]=='X' && c.x<size){c.x--;p=0;}break; //Se il robot non é stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
 
             case 1:if(p!=1){c.x--;p=2;}if(stanza[c.x][c.y]=='X' && c.x>=0){c.x++;p=0;}break; //Se il robot non é stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
 
-            case 2:if(p!=4){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<=size){c.y--;p=0;}break; //Se il robot non é stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+            case 2:if(p!=4){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}break; //Se il robot non é stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
 
             case 3:if(p!=3){c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non é stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
         }
@@ -111,7 +111,7 @@ void movimento2(char stanza[][size])
     int i,j=0,a,ra;
 
 
-    while(stanza[c.x][c.y]!='X' && c.x<=size){//Qui vediamo quante caselle a SUD sono libere.
+    while(stanza[c.x][c.y]!='X' && c.x<size){//Qui vediamo quante caselle a SUD sono libere.
         c.x++;//Vediamo di una casella alla volta quante sono libere.
         max1++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
     if(stanza[c.x][c.y]=='X'){//Siccome quando il robot capisce che vi é un ostacolo, siamo proprio sulla casella da evitare quindi torniamo indietro di una casella e aggiorniamo il massimo.
@@ -136,7 +136,7 @@ void movimento2(char stanza[][size])
 
 
 
-    while(stanza[c.x][c.y]!='X' && c.y<=size){//Qui vediamo quante caselle a EST sono libere.
+    while(stanza[c.x][c.y]!='X' && c.y<size){//Qui vediamo quante caselle a EST sono libere.
         c.y++;//Vediamo di una casella alla volta quante sono libere.
         max3++;}//Se andiamo avanti diciamo che vi é una casella libera per volta.
     if(stanza[c.x][c.y]=='X'){//Siccome quando il robot capisce che vi é un ostacolo, siamo proprio sulla casella da evitare quindi torniamo indietro di una casella e aggiorniamo il massimo.
