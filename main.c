@@ -106,7 +106,7 @@ void movimento1(char stanza[size][size])
 
 void movimento2(char stanza[][size])
 {
-    int i,e,num_ran,max1=0,max2=0,max3=0,max4=0;
+    int i,j=0,e,num_ran,max1=0,max2=0,max3=0,max4=0;
 
     stanza[c.x][c.y] = ' ';
 
@@ -135,36 +135,39 @@ void movimento2(char stanza[][size])
     {c.y++;}//Resetto la posizione.
 
 
-    if(maggiore(max1,max2) == maggiore(max3,max4))
-    {
+    if(maggiore(max1,max2) == maggiore(max3,max4)){
         num_ran=rand()%3;
         switch (num_ran)
         {
             case 0: e = maggiore(max1,max2);break;
             case 1: e = maggiore(max3,max4);break;
-        }
-    }
+        }}
     else
         e = maggiore(maggiore(max1,max2), maggiore(max3,max4));
 
 
+    if(e==max1 && p!=2){while(j<=max1){
+        c.x++;
+        p=1;
+        j++;}}
 
-    if(e==max1)
-    {
+    else if(e==max2 && p!=1){while(j<=max2){
+        c.x--;
+        p=2;
+        j++;}}
 
-    }
-    if(e==max2)
-    {
+    else if(e==max3 && p!=4){while(j<=max3){
+        c.y++;
+        p=3;
+        j++;}}
 
-    }
-    if(e==max3)
-    {
+    else if(e==max4 && p!=3){while(j<=max4){
+        c.x++;
+        p=4;
+        j++;}}
 
-    }
-    if(e==max4)
-    {
 
-    }
+
 
 }
 int maggiore(int x,int y)
