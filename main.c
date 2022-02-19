@@ -170,7 +170,7 @@ void movimento2(char stanza[][size])
     else
         a = maggiore(maggiore(max1,max2), maggiore(max3,max4));//Viene scelto il massimo con piú caselle libere.
 
-    if(a==max1 && p!=1){while(j!=max1){//Se il massimo maggiore é max1 allora ci muoviamo a SUD
+    if(a==max1 && p!=1){while(j!=max1){//Se non siamo stati nella direzione opposta e il massimo maggiore é max1 allora ci muoviamo a SUD
         stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
         c.x++;//Il robot si muove nella direzione ove presenti caselle libere.
         stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
@@ -180,7 +180,7 @@ void movimento2(char stanza[][size])
         j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 
 
-    else if(a==max2 && p!=2){while(j!=max2){//Se il massimo maggiore é max2 allora ci muoviamo a NORD
+    else if(a==max2 && p!=2){while(j!=max2){//Se non siamo stati nella direzione opposta e il massimo maggiore é max2 allora ci muoviamo a NORD
             stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
             c.x--;//Il robot si muove nella direzione ove presenti caselle libere.
             stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
@@ -190,7 +190,7 @@ void movimento2(char stanza[][size])
             j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 
 
-    else if(a==max3 && p!=4){while(j!=max3){//Se il massimo maggiore é max3 allora ci muoviamo a EST
+    else if(a==max3 && p!=4){while(j!=max3){//Se non siamo stati nella direzione opposta e il massimo maggiore é max3 allora ci muoviamo a EST
             stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
             c.y++;//Il robot si muove nella direzione ove presenti caselle libere.
             stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
@@ -200,7 +200,7 @@ void movimento2(char stanza[][size])
             j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 
 
-    else if(a==max4 && p!=3){while(j!=max4){//Se il massimo maggiore é max4 allora ci muoviamo a OVEST
+    else if(a==max4 && p!=3){while(j!=max4){//Se non siamo stati nella direzione opposta e il massimo maggiore é max4 allora ci muoviamo a OVEST
             stanza[c.x][c.y]=' ';//Liberiamo la casella precedente.
             c.y--;//Il robot si muove nella direzione ove presenti caselle libere.
             stanza[c.x][c.y] = 'R';//Il robot occupa la casella successiva.
