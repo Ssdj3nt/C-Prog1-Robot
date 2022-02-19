@@ -47,8 +47,12 @@ int main(void)
     while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
     {
         x=rand()%10;//Generazione di numeri pseudocasuali da 0 a 9.
-        if(x>=0 && x<3)//Se compreso tra 1 e 3 allora per il 30% il robot si muoverá in modo casuale.
+        if(x>=0 && x<3)
+        {
             movimento1(stanza);
+            visualizza_matrice(stanza);
+            printf("RIGA=%d\tCOLONNA=%d\n\n",c.x,c.y);//Visualizzazione della riga e della colonna che occupa il robot.
+        }//Se compreso tra 1 e 3 allora per il 30% il robot si muoverá in modo casuale.
         else
             movimento2(stanza);//Tutti i numeri maggiori di tre fanno muovere il robot in modo'intelligente per il 70% delle volte.
     }
@@ -209,6 +213,7 @@ void movimento2(char stanza[][size])
             p=4;//Salviamo la direzione intrapresa.
             j++;}}//Finché non abbiamo raggiunto il massimo di caselle percorribili incrementiamo l'indice j;
 }
+
 int maggiore(int x,int y)
 {
     if(x>y)
