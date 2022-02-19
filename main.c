@@ -4,7 +4,7 @@
 
 #include <stdio.h>//Libreria standard I/O del C.
 #include <stdlib.h>//Libreria per la funzione srand() e rand() per generare un seme e per generare numeri pseudocasuali.
-#include <time.h>//Libreria utilizzata per inizializzare il seme a 0, cosi facendo, non si generano ripetizioni nella generazione di numeri casuali.
+#include <time.h>//Libreria utilizzata per inizializzare il seme a zero, cosi facendo, non si generano ripetizioni nella generazione di numeri casuali.
 #define  size 16//La variabile size viene definita con il valore di 16, usata poi per indicare il numero di righe e di colonne.
 
 struct robot
@@ -18,7 +18,7 @@ void visualizza_matrice(char [][size]);//Visualizza in output(terminale) la stan
 void posizione_robot(char [][size]);//Function deputata all'inserimento del robot nella stanza in una posizione iniziale scelta dall'utente.
 void movimento1(char [][size]);//Function deputata al movimento casuale nella stanza del robot.Questo movimento si verifica nel 30% dei casi.
 void movimento2(char [][size]);//Function deputata al movimento in cui il robot “vede” e individua il percorso piu lungo percorribile.Questo movimento si verifica nel 70% dei casi.
-int maggiore(int ,int);
+int maggiore(int ,int);//Funzione deputata al confronto dei massimi percorsi percorribili dal robot.
 int p=0;//Variabile globale in cui viene memorizzata la direzione presa del robot cosi che al passo successivo non possa tornare alla posizione precedente.
 
 int main(void)
@@ -44,9 +44,13 @@ int main(void)
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
     visualizza_matrice(stanza);//Visualizza la stanza dopo aver posizionato il robot.
-    while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finche esso non esce dalla stanza.
+    while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
     {
-        movimento2(stanza);//Tutti i numeri maggiori uguali di 3 fanno muovere il robot in modo'intelligente (70%).
+        x=rand()%10;//Generazione di numeri pseudocasuali da 0 a 9.
+        if(x>=0 && x<3)//Se compreso tra 1 e 3 allora per il 30% il robot si muoverá in modo casuale.
+            movimento1(stanza);
+        else
+            movimento2(stanza);//Tutti i numeri maggiori di tre fanno muovere il robot in modo'intelligente per il 70% delle volte.
     }
     printf("\nIl robot e' uscito dalla stanza!\n");//Quando il ciclo finisce e il robot esce dalla stanza viene visualizzato a terminale il messaggio.*/
 }
@@ -79,7 +83,7 @@ void posizione_robot(char stanza[size][size])
         else
             printf("\n-Errore, qui e' presente un ostacolo, riprova.\n");//Altrimenti..
     }
-    while(stanza[c.x][c.y] == 'X');//Finche' le coordinate inserite ricadono sulle mura o sugli ostacoli della stanza, viene chiesto all'utente di reinserire le coordinate.
+    while(stanza[c.x][c.y] == 'X');//Finché le coordinate inserite ricadono sulle mura o sugli ostacoli della stanza, viene chiesto all'utente di reinserire le coordinate.
 }
 
 void movimento1(char stanza[size][size])
@@ -90,13 +94,13 @@ void movimento1(char stanza[size][size])
 
     switch(nr)
         {
-            case 0:if(p!=2){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non e' stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
+            case 0:if(p!=2){c.x++;p=1;}if(stanza[c.x][c.y]=='X'){c.x--;p=0;}break; //Se il robot non é stato precedentemente a SUD allora... - Caso in cui il robot scelga di andare a NORD.
 
-            case 1:if(p!=1){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non e' stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
+            case 1:if(p!=1){c.x--;p=2;}if(stanza[c.x][c.y]=='X'){c.x++;p=0;}break; //Se il robot non é stato precedentemente a NORD allora... - Caso in cui il robot scelga di andare a SUD.
 
-            case 2:if(p!=4){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}break; //Se il robot non e' stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
+            case 2:if(p!=4){c.y++;p=3;}if(stanza[c.x][c.y]=='X' && c.y<size){c.y--;p=0;}break; //Se il robot non é stato precedentemente a OVEST allora... - Caso in cui il robot scelga di andare a EST.
 
-            case 3:if(p!=3){c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non e' stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
+            case 3:if(p!=3){c.y--;p=4;}if(stanza[c.x][c.y]=='X' && c.y>=0){c.y++;p=0;}break; //Se il robot non é stato precedentemente a EST allora... - Caso in cui il robot scelga di andare a OVEST.
         }stanza[c.x][c.y]='R';//Quando il robot ha scelto dove andare allora viene inserito il carattere rappresentante la sua posizione.
 }
 
@@ -105,7 +109,7 @@ void movimento2(char stanza[][size])
     int max1=0,max2=0,max3=0,max4=0;
     int i,j=0,a,ra;
 
-    while(stanza[c.x][c.y]!='X' && c.x<=size){//SUD
+    while(stanza[c.x][c.y]!='X' && c.x<size){//SUD
         c.x++;
         max1++;}
     if(stanza[c.x][c.y]=='X'){
@@ -123,7 +127,7 @@ void movimento2(char stanza[][size])
     for(i=0;i<max2;i++)
         c.x++;
 
-    while(stanza[c.x][c.y]!='X' && c.y<=size){//EST
+    while(stanza[c.x][c.y]!='X' && c.y<size){//EST
         c.y++;
         max3++;}
     if(stanza[c.x][c.y]=='X'){
@@ -190,5 +194,5 @@ int maggiore(int x,int y)
         return x;
     else
         return y;
-}
+}//In input due variabili per contenere i massimi.
 
