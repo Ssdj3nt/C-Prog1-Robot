@@ -44,7 +44,7 @@ int main(void)//Main dell'algoritmo.
     int x;//Variabile usata per contenere numeri casuali.
     posizione_robot(stanza);//Viene inserito il robot nella stanza.
     visualizza_matrice(stanza);//Visualizza la stanza dopo aver posizionato il robot.
-    while((c.x>=0 && c.x<=size) && (c.y>=0 && c.y<=size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
+    while((c.x>=0 && c.x<size) && (c.y>=0 && c.y<size))//Ciclo iterativo che ci consente di richiamare le function dei movimenti del robot finché esso non esce dalla stanza.
     {
         x=rand()%10;//Generazione di numeri da 0 a 9.
         if(x>=0 && x<3)//Se generato un numero maggiore uguale di zero e minore di tre allora fai muovere il robot in modo casuale altrimenti fallo muovere in modo intelligente.
